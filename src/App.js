@@ -1,42 +1,39 @@
-import React from 'react';
+import { useState, React } from 'react';
 import {
   ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
   theme,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import LandingPage from './components/LandingPage';
+import DraftAssistant from './components/DraftAssistant';
+import parseCSV from './util/parseCSV';
 
 function App() {
-  return (
+  const [playerData, setPlayerData] = useState(undefined);
+
+  const loadFile = (e) => {
+
+    e.preventDefault();
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      const sortedPlayers = parseCSV(e.target.result).sort((a, b) => {
+        return b.Average - a.Average
+      });
+      console.log('sortedPlyaers', sortedPlayers);
+      setPlayerData(sortedPlayers);
+    }
+    //TODO: make sure it's a CSV file
+    reader.readAsText(e.target.files[0]);
+  }
+
+  return(
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      {playerData 
+        ? <DraftAssistant playerData={playerData} />
+        : <LandingPage loadFile={loadFile}/>
+      }
     </ChakraProvider>
-  );
+  );  
 }
 
 export default App;
