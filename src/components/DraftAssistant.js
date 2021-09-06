@@ -17,8 +17,7 @@ const DraftAssistant = (props) => {
         setDraftedPlayers(draftedPlayers.concat({...player, round, pick}));
 
         setPick(pick + 1);
-        //TODO: update wtih the correct number of teams
-        //TODO: fix math error with rounds around back end of round
+        
         setRound(
             pick % props.numberOfTeams === 0 ?
             round :

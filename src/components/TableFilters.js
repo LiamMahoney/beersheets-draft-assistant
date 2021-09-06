@@ -11,7 +11,6 @@ import {SearchIcon} from '@chakra-ui/icons';
 const TableFilters = (props) => {
 
     const handleNameChange = (event) => {
-        // setPlayerName(event.target.value);
         props.handleNameChange(event.target.value);
     }
 

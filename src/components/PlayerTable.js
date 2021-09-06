@@ -81,13 +81,4 @@ const PlayerTable = ({ players, selectPlayer }) => {
     )
 }
 
-// export default React.memo(PlayerTable, (prevProps, newProps) => {
-//     console.log('prevProps', prevProps);
-//     console.log('newProps', newProps);
-//     if (prevProps.players.length === newProps.players.length) {
-//         return true;
-//     }
-//     return false;
-// });
-
 export default PlayerTable;
