@@ -9,6 +9,16 @@ import parseCSV from './util/parseCSV';
 
 function App() {
   const [playerData, setPlayerData] = useState(undefined);
+  const [numTeams, setNumTeams] = useState(10);
+  const [draftPosition, setDraftPosition] = useState();
+
+  const numTeamInput = (e) => {
+    setNumTeams(e.target.value);
+  }
+
+  const userDraftPosInput = (e) => {
+    setDraftPosition(e.target.value);
+  }
 
   const loadFile = (e) => {
 
@@ -19,7 +29,7 @@ function App() {
       const sortedPlayers = parseCSV(e.target.result).sort((a, b) => {
         return b.Average - a.Average
       });
-      console.log('sortedPlyaers', sortedPlayers);
+
       setPlayerData(sortedPlayers);
     }
     //TODO: make sure it's a CSV file
@@ -29,8 +39,8 @@ function App() {
   return(
     <ChakraProvider theme={theme}>
       {playerData 
-        ? <DraftAssistant playerData={playerData} />
-        : <LandingPage loadFile={loadFile}/>
+        ? <DraftAssistant playerData={playerData} numberOfTeams={numTeams} draftPosition={draftPosition} />
+        : <LandingPage loadFile={loadFile} handleTeamNumChange={numTeamInput} handleUserDraftPosChange={userDraftPosInput}/>
       }
     </ChakraProvider>
   );  
