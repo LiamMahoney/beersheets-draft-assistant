@@ -25,7 +25,7 @@ const LandingPage = (props) => {
             let options = [];
 
             for (let i = 1; i <= numberOfTeams; i++) {
-                options.push(<option value={i}>{i}</option>)
+                options.push(<option key={i} value={i}>{i}</option>)
             }
 
             return options;
