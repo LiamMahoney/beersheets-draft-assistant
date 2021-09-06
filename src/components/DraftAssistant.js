@@ -3,7 +3,7 @@ import {
     Grid,
     GridItem
   } from '@chakra-ui/react';
-import PlayerTable from './PlayerTable';
+import PlayerTable from './PlayerTable.js';
 import TopSection from './TopSection';
 
 const DraftAssistant = (props) => {
@@ -13,13 +13,17 @@ const DraftAssistant = (props) => {
     const [pick, setPick] = useState(1);
 
     const selectPlayer = (player) => {
-        // setAvailablePlayers(availablePlayers.filter(p => p.Name !== player.Name && p.Average !== player.Average));
+        setAvailablePlayers(availablePlayers.filter(p => p.Name !== player.Name && p.Average !== player.Average));
         setDraftedPlayers(draftedPlayers.concat({...player, round, pick}));
 
         setPick(pick + 1);
         //TODO: update wtih the correct number of teams
         //TODO: fix math error with rounds around back end of round
-        setRound(Math.floor(pick/10) + 1);
+        setRound(
+            pick % props.numberOfTeams === 0 ?
+            round :
+            Math.floor(pick/props.numberOfTeams) + 1
+        );
     }
 
     return (
@@ -30,13 +34,13 @@ const DraftAssistant = (props) => {
             templateColumns="repeat(12, 1fr)"
         >
             <TopSection 
-                draftedPlayers={draftedPlayers} 
+                draftedPlayers={draftedPlayers}
+                numberOfTeams={props.numberOfTeams}
                 round={round} 
                 pick={pick}    
             />
             <PlayerTable
-                // players={availablePlayers}
-                players={props.playerData}
+                players={availablePlayers}
                 selectPlayer={selectPlayer}
             />
             <GridItem 

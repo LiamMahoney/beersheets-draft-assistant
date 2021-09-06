@@ -28,7 +28,7 @@ const DraftTickerPlayer = (props) => {
             <Flex flexGrow="1" flexDirection="column" justifyContent="flex-start">
                 <Text fontSize="xs" >{props.name}</Text>
             </Flex>
-            <Text fontSize="xs">Pick {props.pick} - {props.round}.{props.roundPick}</Text>
+            <Text fontSize="xs">{props.round}.{props.roundPick} - {props.pick}</Text>
         </Flex>
     );
 }
