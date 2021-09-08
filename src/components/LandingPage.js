@@ -61,7 +61,7 @@ const LandingPage = (props) => {
                 <Select
                     onChange={handleNoTeamChange}
                     width="80px"
-                    default='10'
+                    defaultValue='10'
                 >
                     <option value='5'>5</option>
                     <option value='6'>6</option>
