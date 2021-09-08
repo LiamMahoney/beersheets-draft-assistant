@@ -13,7 +13,7 @@ const DraftAssistant = (props) => {
     const [pick, setPick] = useState(1);
 
     const selectPlayer = (player) => {
-        setAvailablePlayers(availablePlayers.filter(p => p.Name !== player.Name && p.Average !== player.Average));
+        setAvailablePlayers(availablePlayers.filter(p => !(p.Name === player.Name && p.Average === player.Average)));
         setDraftedPlayers(draftedPlayers.concat({...player, round, pick}));
 
         setPick(pick + 1);
