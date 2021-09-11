@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 
 import TableFilters from './TableFilters';
-import ChakraBaseTable from './ChakraBaseTable';
+import ReactVirtualTable from './ReactVirtualTable';
 
 const PlayerTable = ({ players, selectPlayer }) => {
     const [nameFilter, setNameFilter] = useState('');
@@ -70,8 +70,8 @@ const PlayerTable = ({ players, selectPlayer }) => {
                     teams={teams}
                     positions={positions}
                 />
-                <Box flexGrow="1">
-                    <ChakraBaseTable
+                <Box flexGrow="1" overflowX="scroll">
+                    <ReactVirtualTable
                         players={currPlayers}
                         selectPlayer={selectPlayer}
                     />
