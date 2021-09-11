@@ -62,7 +62,7 @@ const PlayerTable = ({ players, selectPlayer }) => {
 
     return (
         <GridItem colSpan={8} rowSpan={10} >
-            <Flex width="100%" height="100%" flexDir="column" borderRight="1px">
+            <Flex width="100%" height="100%" flexDir="column" borderRight="1px" borderColor="inherit">
                 <TableFilters
                     handleNameChange={handleNameChangeDebounced}
                     handleTeamChange={handleTeamChange}

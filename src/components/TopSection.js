@@ -7,7 +7,7 @@ import TickerSettings from './TickerSettings';
 const TopSection = (props) => {
 
     return (
-        <GridItem colSpan={12} rowSpan={2} borderBottom="1px">
+        <GridItem colSpan={12} rowSpan={2} borderBottom="1px" borderColor="inherit">
             <Flex height="100%">
                 <TickerPickInfo 
                     pick={props.pick}
