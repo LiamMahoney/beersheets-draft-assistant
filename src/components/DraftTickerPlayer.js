@@ -4,12 +4,12 @@ import { Flex, Text, useColorModeValue } from '@chakra-ui/react';
 const DraftTickerPlayer = (props) => {
 
     const positionColorMap = {
-        qb: useColorModeValue('red.300', 'red.600'),
-        rb: useColorModeValue('blue.300', 'blue.600'),
-        wr: useColorModeValue('green.300', 'green.600'),
-        te: useColorModeValue('orange.300', 'orange.600'),
-        def: useColorModeValue('yellow.300', 'yellow.600'),
-        k: useColorModeValue('purple.300', 'purple.600')
+        qb: useColorModeValue('red.200', 'red.600'),
+        rb: useColorModeValue('blue.200', 'blue.600'),
+        wr: useColorModeValue('green.200', 'green.600'),
+        te: useColorModeValue('orange.200', 'orange.600'),
+        def: useColorModeValue('yellow.200', 'yellow.600'),
+        k: useColorModeValue('purple.200', 'purple.600')
     };
 
     return (
