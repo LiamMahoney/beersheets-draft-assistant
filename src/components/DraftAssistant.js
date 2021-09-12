@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {
     Grid,
-    GridItem
-  } from '@chakra-ui/react';
+} from '@chakra-ui/react';
 import PlayerTable from './PlayerTable.js';
 import TopSection from './TopSection';
+import DraftBoard from './DraftBoard.js';
 
 const DraftAssistant = (props) => {
     const [draftedPlayers, setDraftedPlayers] = useState([]);
@@ -14,13 +14,16 @@ const DraftAssistant = (props) => {
 
     const selectPlayer = (player) => {
         setAvailablePlayers(availablePlayers.filter(p => !(p.Name === player.Name && p.Average === player.Average)));
-        setDraftedPlayers(draftedPlayers.concat({...player, round, pick}));
+
+        const roundPick = pick % props.numberOfTeams === 0 ? props.numberOfTeams : pick % props.numberOfTeams;
+
+        setDraftedPlayers(draftedPlayers.concat({...player, round, pick, roundPick}));
 
         setPick(pick + 1);
         
         setRound(
             pick % props.numberOfTeams === 0 ?
-            round :
+            round + 1:
             Math.floor(pick/props.numberOfTeams) + 1
         );
     }
@@ -42,9 +45,9 @@ const DraftAssistant = (props) => {
                 players={availablePlayers}
                 selectPlayer={selectPlayer}
             />
-            <GridItem 
-                colSpan={4} 
-                rowSpan={10}
+            <DraftBoard
+                numberOfTeams={props.numberOfTeams}
+                draftedPlayers={draftedPlayers}
             />
         </Grid>
     );

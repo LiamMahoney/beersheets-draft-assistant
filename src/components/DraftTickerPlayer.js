@@ -14,16 +14,16 @@ const DraftTickerPlayer = (props) => {
 
     return (
         <Flex
-            // border="1px"
             backgroundColor={positionColorMap[props.position.toLowerCase()]}
             width="110px"
-            margin={3}
-            height="80%"
+            margin={1.5}
+            minHeight="80%"
             maxHeight="110px"
             flexDirection="column"
-            padding={1}
-            boxShadow="sm"
+            padding={2}
             borderRadius={5}
+            gridColumn={props.gridColumn}
+            gridRow={props.gridRow}
         >
             <Text fontSize="xs">{props.position} - {props.team}</Text>
             <Flex flexGrow="1" flexDirection="column" justifyContent="flex-start">
