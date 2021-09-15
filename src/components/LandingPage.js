@@ -138,7 +138,7 @@ const LandingPage = (props) => {
             <ColorModeSwitcher 
                 position="absolute"
                 top={0}
-                right={0}
+                left={0}
             />
         </Flex>
     );
