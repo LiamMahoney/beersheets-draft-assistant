@@ -2,7 +2,6 @@ import React from 'react';
 import { GridItem, Flex } from '@chakra-ui/react';
 import TickerPickInfo from './TickerPickInfo';
 import DraftedPlayerTicker from './DraftedPlayerTicker';
-import TickerSettings from './TickerSettings';
 
 const TopSection = (props) => {
 
@@ -17,7 +16,6 @@ const TopSection = (props) => {
                     draftedPlayers={props.draftedPlayers}
                     numberOfTeams={props.numberOfTeams}
                 />
-                <TickerSettings />
             </Flex>
         </GridItem>
     );

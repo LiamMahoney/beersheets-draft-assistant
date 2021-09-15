@@ -11,6 +11,7 @@ import {
     Select
   } from '@chakra-ui/react';
 import { ArrowUpIcon } from '@chakra-ui/icons';
+import { ColorModeSwitcher } from '../ColorModeSwitcher';
 
 const LandingPage = (props) => {
     const [numberOfTeams, setNumberOfTeams] = useState(10);
@@ -134,6 +135,11 @@ const LandingPage = (props) => {
                     </ListItem>
                 </OrderedList>
             </Flex>
+            <ColorModeSwitcher 
+                position="absolute"
+                top={0}
+                right={0}
+            />
         </Flex>
     );
 }
