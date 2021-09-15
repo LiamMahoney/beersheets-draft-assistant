@@ -107,7 +107,7 @@ const LandingPage = (props) => {
                     Upload .csv
                     </label>
                 </Button>
-                <Input id="file-upload" type="file" onChange={(e) => props.loadFile(e)} display="none"/>
+                <Input id="file-upload" type="file" onChange={(e) => props.loadFile(e)} display="none" accept=".csv" />
             </Flex>
             <Flex margin={5} flexDirection="column" alignItems="center">
                 <Heading size="lg">How to use:</Heading>
