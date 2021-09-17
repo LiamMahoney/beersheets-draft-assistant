@@ -6,19 +6,13 @@ import {
 import LandingPage from './components/LandingPage';
 import DraftAssistant from './components/DraftAssistant';
 import parseCSV from './util/parseCSV';
+import parsePositionSettings from './util/parseCSV';
+import parseNumTeams from './util/parseCSV';
 
 function App() {
   const [playerData, setPlayerData] = useState(undefined);
-  const [numTeams, setNumTeams] = useState(10);
-  const [draftPosition, setDraftPosition] = useState();
-
-  const numTeamInput = (e) => {
-    setNumTeams(e.target.value);
-  }
-
-  const userDraftPosInput = (e) => {
-    setDraftPosition(e.target.value);
-  }
+  const [numTeams, setNumTeams] = useState(undefined);
+  const [positionSettings, setPositionSettings] = useState(undefined);
 
   const loadFile = (e) => {
 
@@ -31,6 +25,10 @@ function App() {
       });
 
       setPlayerData(sortedPlayers);
+
+      setPositionSettings(parsePositionSettings(e.target.fileName));
+
+      setNumTeams(parseNumTeams(e.target.fileName));
     }
     //TODO: make sure it's a CSV file
     reader.readAsText(e.target.files[0]);
@@ -39,8 +37,15 @@ function App() {
   return(
     <ChakraProvider theme={theme}>
       {playerData 
-        ? <DraftAssistant playerData={playerData} numberOfTeams={numTeams} draftPosition={draftPosition} />
-        : <LandingPage loadFile={loadFile} handleTeamNumChange={numTeamInput} handleUserDraftPosChange={userDraftPosInput}/>
+        ? <DraftAssistant 
+            playerData={playerData} 
+            numberOfTeams={numTeams}
+            positionSettings={positionSettings}
+          />
+        : <LandingPage 
+            loadFile={loadFile}
+            numTeams={numTeams}
+          />
       }
     </ChakraProvider>
   );  
