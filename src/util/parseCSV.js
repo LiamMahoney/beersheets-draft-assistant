@@ -1,5 +1,3 @@
-import { position } from "@chakra-ui/styled-system";
-
 /**
  * Parses the content of a CSV file into an array. 
  * 
@@ -7,7 +5,7 @@ import { position } from "@chakra-ui/styled-system";
  * @returns {array} each row is parsed into an object where the keys are the 
  * csv headers and the values are the row values
  */
-function parseCSV (data) {
+export function parseCSV (data) {
     // Split data into lines and separate headers from actual data
     // using Array spread operator
     const [headerLine, ...lines] = data.split('\n');
@@ -44,7 +42,7 @@ function parseCSV (data) {
  * @param {string} filename name of the csv file being uploaded
  * @returns {object} describes the positions of the league
  */
-function parsePositionSettings (filename) {
+export function parsePositionSettings (filename) {
     // position stored at each index
     const positionMap = {
         2: 'QB',
@@ -65,6 +63,7 @@ function parsePositionSettings (filename) {
         positions[positionMap[i]] = filenameArr[i];
     }
 
+    console.log('positions', positions);
     return positions;
 }
 
@@ -72,12 +71,7 @@ function parsePositionSettings (filename) {
  * @param {string} filename name of the csv file being uploaded
  * @returns {int} number of teams in the league
  */
-function parseNumTeams (filename) {
+export function parseNumTeams (filename) {
+    console.log('numTeams', filename.split(',')[0]);
     return filename.split(',')[0];
-}
-
-export default {
-    parseCSV, 
-    parsePositionSettings,
-    parseNumTeams
 }
