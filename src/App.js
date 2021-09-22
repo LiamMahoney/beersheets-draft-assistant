@@ -5,9 +5,7 @@ import {
 } from '@chakra-ui/react';
 import LandingPage from './components/LandingPage';
 import DraftAssistant from './components/DraftAssistant';
-import parseCSV from './util/parseCSV';
-import parsePositionSettings from './util/parseCSV';
-import parseNumTeams from './util/parseCSV';
+import { parseCSV, parsePositionSettings, parseNumTeams } from './util/parseCSV';
 
 function App() {
   const [playerData, setPlayerData] = useState(undefined);
@@ -15,7 +13,6 @@ function App() {
   const [positionSettings, setPositionSettings] = useState(undefined);
 
   const loadFile = (e) => {
-
     e.preventDefault();
     const reader = new FileReader();
 
@@ -25,13 +22,14 @@ function App() {
       });
 
       setPlayerData(sortedPlayers);
-
-      setPositionSettings(parsePositionSettings(e.target.fileName));
-
-      setNumTeams(parseNumTeams(e.target.fileName));
     }
     //TODO: make sure it's a CSV file
     reader.readAsText(e.target.files[0]);
+
+    //TODO: move these and parseCSV to promises, only want the spinner icon on teh upload button to go away once everything is loaded properly
+    setPositionSettings(parsePositionSettings(e.target.files[0].name));
+
+    setNumTeams(parseNumTeams(e.target.files[0].name));
   }
 
   return(
