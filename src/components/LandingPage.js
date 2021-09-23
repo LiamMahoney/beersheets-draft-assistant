@@ -15,6 +15,7 @@ const LandingPage = (props) => {
     return (
         <Flex 
             alignItems="center"
+            justifyContent="center"
             flexDirection="column"
             height="100vh"
             width="100vw"
