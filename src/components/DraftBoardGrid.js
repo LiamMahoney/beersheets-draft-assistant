@@ -6,6 +6,7 @@ import {
     useColorModeValue
 } from '@chakra-ui/react';
 import DraftTickerPlayer from './DraftTickerPlayer';
+import TeamList from './TeamList';
 
 const DraftBoardGrid = (props) => {
 
@@ -26,11 +27,15 @@ const DraftBoardGrid = (props) => {
     return (
         <Flex>
             <Grid
-                templateColumns={`repeat(${props.numberOfTeams + 1}, 1fr)`}
-                gridAutoRows="1fr"
+                templateColumns={`minmax(40px, 1fr) repeat(${props.numberOfTeams}, minmax(120px, 1fr))`}
+                gridTemplateRows={`minmax(40px, 1fr)`}
                 paddingRight={4}
                 paddingBottom={2}
             >
+                <TeamList 
+                    draftData={props.draftData}
+                    handleTeamNameChange={props.handleTeamNameChange}
+                />
                 {
                     // round numbers of the left side of the draft board
                     rounds.map((round) => {
@@ -38,7 +43,7 @@ const DraftBoardGrid = (props) => {
                             <Text
                                 style={{'writing-mode': 'vertical-rl'}}
                                 textAlign="center"
-                                gridRow={round}
+                                gridRow={round + 1}
                                 gridColumn={1}
                                 position="sticky"
                                 left={0}
@@ -64,7 +69,7 @@ const DraftBoardGrid = (props) => {
                                 round={p.round}
                                 roundPick={p.roundPick}
                                 gridColumn={p.round % 2  === 0 ? (props.numberOfTeams - p.roundPick) + 2 : p.roundPick + 1}
-                                gridRow={p.round}
+                                gridRow={p.round + 1}
                             />
                         )
                     })

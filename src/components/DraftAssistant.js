@@ -48,6 +48,8 @@ const DraftAssistant = (props) => {
             <DraftBoard
                 numberOfTeams={props.numberOfTeams}
                 draftedPlayers={draftedPlayers}
+                draftData={props.draftData}
+                handleTeamNameChange={props.handleTeamNameChange}
             />
         </Grid>
     );

@@ -51,6 +51,8 @@ const DraftBoard = (props) => {
                         <DraftBoardGrid
                                 draftedPlayers={props.draftedPlayers}
                                 numberOfTeams={props.numberOfTeams}
+                                draftData={props.draftData}
+                                handleTeamNameChange={props.handleTeamNameChange}
                             />
                     </TabPanel>
                 </TabPanels>

@@ -1,4 +1,4 @@
-import { useState, React } from 'react';
+import { useState, useEffect, React } from 'react';
 import {
   ChakraProvider,
   theme,
@@ -11,6 +11,7 @@ function App() {
   const [playerData, setPlayerData] = useState(undefined);
   const [numTeams, setNumTeams] = useState(undefined);
   const [positionSettings, setPositionSettings] = useState(undefined);
+  const [draftData, setDraftData] = useState(undefined);
 
   const loadFile = (e) => {
     e.preventDefault();
@@ -26,19 +27,42 @@ function App() {
     //TODO: make sure it's a CSV file
     reader.readAsText(e.target.files[0]);
 
-    //TODO: move these and parseCSV to promises, only want the spinner icon on teh upload button to go away once everything is loaded properly
     setPositionSettings(parsePositionSettings(e.target.files[0].name));
+    let tempNumTeams = parseNumTeams(e.target.files[0].name)
+    setNumTeams(tempNumTeams);
 
-    setNumTeams(parseNumTeams(e.target.files[0].name));
+    let dd = [];
+
+    for (let i = 1; i <= tempNumTeams; i++) {
+      dd.push({
+        name: `Team ${i}`,
+        pick: i,
+        players: []
+      });
+    }
+
+    setDraftData(dd);
+  }
+
+  const handleTeamNameChange = (team) => {
+    setDraftData(draftData.filter((t) => {
+      if (t.pick === team.pick) {
+        return team;
+      }
+
+      return team;
+    }));
   }
 
   return(
     <ChakraProvider theme={theme}>
-      {playerData 
+      {draftData && playerData
         ? <DraftAssistant 
             playerData={playerData} 
             numberOfTeams={numTeams}
             positionSettings={positionSettings}
+            draftData={draftData}
+            handleTeamNameChange={handleTeamNameChange}
           />
         : <LandingPage 
             loadFile={loadFile}
