@@ -68,7 +68,7 @@ const DraftBoardGrid = (props) => {
                                 pick={p.pick}
                                 round={p.round}
                                 roundPick={p.roundPick}
-                                gridColumn={p.round % 2  === 0 ? (props.numberOfTeams - p.roundPick) + 2 : p.roundPick + 1}
+                                gridColumn={p.round % 2  === 0 ? (props.numberOfTeams - parseInt(p.roundPick)) + 2 : parseInt(p.roundPick) + 1}
                                 gridRow={p.round + 1}
                             />
                         )
