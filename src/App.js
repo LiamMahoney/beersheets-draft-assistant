@@ -63,6 +63,7 @@ function App() {
             positionSettings={positionSettings}
             draftData={draftData}
             handleTeamNameChange={handleTeamNameChange}
+            setDraftData={setDraftData}
           />
         : <LandingPage 
             loadFile={loadFile}

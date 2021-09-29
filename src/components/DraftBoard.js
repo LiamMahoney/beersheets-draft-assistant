@@ -8,6 +8,7 @@ import {
     GridItem,
 } from '@chakra-ui/react';
 import DraftBoardGrid from './DraftBoardGrid';
+import DraftBoardRosters from './DraftBoardRosters';
 
 const DraftBoard = (props) => {
     return (
@@ -40,7 +41,11 @@ const DraftBoard = (props) => {
                         // overflowX="scroll"
                         padding={0}
                     >
-                        Rosters
+                        <DraftBoardRosters
+                            draftData={props.draftData}
+                            handleTeamNameChange={props.handleTeamNameChange}
+                            positionSettings={props.positionSettings}
+                        />
                     </TabPanel>
                     <TabPanel
                         height="100%"

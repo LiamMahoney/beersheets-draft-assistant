@@ -15,16 +15,36 @@ const DraftAssistant = (props) => {
     const selectPlayer = (player) => {
         setAvailablePlayers(availablePlayers.filter(p => !(p.Name === player.Name && p.Average === player.Average)));
 
-        const roundPick = pick % props.numberOfTeams === 0 ? props.numberOfTeams : pick % props.numberOfTeams;
-
+        const roundPick = pick % props.draftData.length === 0 ? props.draftData.length : pick % props.draftData.length;
+        console.log('roundPick', roundPick);
         setDraftedPlayers(draftedPlayers.concat({...player, round, pick, roundPick}));
+
+        const teamPick = round % 2 === 0
+                            ? props.draftData.length - (roundPick - 1)
+                            : roundPick;
+
+        console.log('teamPick', teamPick);
+
+        let x = props.draftData.reduce((pv, cv) => {
+            console.log('pv', pv);
+            console.log('cv', cv);
+            if (cv.pick === teamPick) {
+                cv.players = cv.players.concat({...player, round, pick, roundPick})
+                console.log('cv after concat', )
+            }
+
+            return pv.concat(cv);
+        }, [])
+
+        console.log('x', x);
+        props.setDraftData(x);
 
         setPick(pick + 1);
         
         setRound(
-            pick % props.numberOfTeams === 0 ?
+            pick % props.draftData.length === 0 ?
             round + 1:
-            Math.floor(pick/props.numberOfTeams) + 1
+            Math.floor(pick/props.draftData.length) + 1
         );
     }
 
@@ -37,7 +57,7 @@ const DraftAssistant = (props) => {
         >
             <TopSection 
                 draftedPlayers={draftedPlayers}
-                numberOfTeams={props.numberOfTeams}
+                numberOfTeams={props.draftData.length}
                 round={round} 
                 pick={pick}    
             />
@@ -46,10 +66,11 @@ const DraftAssistant = (props) => {
                 selectPlayer={selectPlayer}
             />
             <DraftBoard
-                numberOfTeams={props.numberOfTeams}
+                numberOfTeams={props.draftData.length}
                 draftedPlayers={draftedPlayers}
                 draftData={props.draftData}
                 handleTeamNameChange={props.handleTeamNameChange}
+                positionSettings={props.positionSettings}
             />
         </Grid>
     );
