@@ -20,7 +20,6 @@ const DraftBoard = (props) => {
                 height="100%"
                 display="flex"
                 flexDirection="column"
-                // overflow="auto"
             >
                 <TabList
                     justifyContent="space-evenly"
@@ -38,19 +37,17 @@ const DraftBoard = (props) => {
                 >
                     <TabPanel
                         height="100%"
-                        // overflowX="scroll"
                         padding={0}
                     >
                         <DraftBoardRosters
                             draftData={props.draftData}
                             handleTeamNameChange={props.handleTeamNameChange}
                             positionSettings={props.positionSettings}
+                            setPositionSettings={props.setPositionSettings}
                         />
                     </TabPanel>
                     <TabPanel
                         height="100%"
-                        // overflowX="scroll"
-                        // overflowY="scroll"
                         padding={0}
                     >
                         <DraftBoardGrid

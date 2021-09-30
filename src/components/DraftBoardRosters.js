@@ -85,6 +85,10 @@ const DraftBoardRosters = (props) => {
             let copyPositionIndexes = JSON.parse(JSON.stringify(positionGridIndexMap));
 
             for (let player of team.players) {
+                // the lowest numbered row (highest row) available for the
+                // player's position
+                let rowIndex = undefined;
+
                 // find the key that contains the player's position
                 for (let position in copyPositionIndexes) {
                     if (copyPositionIndexes[position].length > 0) {
@@ -92,25 +96,38 @@ const DraftBoardRosters = (props) => {
                         if (position.toLowerCase().indexOf(player.Pos.toLowerCase()) > -1) {
                             // player's position matches, add player to the 
                             // row that's popped
-                            let rowIndex = copyPositionIndexes[position].pop();
-
-                            rosterBoard.push(
-                                <DraftTickerPlayer
-                                    key={player.pick}
-                                    position={player.Pos}
-                                    name={player.Name}
-                                    team={player['Tm/Bye']}
-                                    gridColumn={team.pick + 1}
-                                    gridRow={rowIndex + 1}
-                                />
-                            );
+                            rowIndex = copyPositionIndexes[position].pop();
 
                             break;
                         }    
                     }
                 }
-                //TODO: if this is reached this means the player is a bench player. still need to figure out how to display them.
-                // Maybe when this point is reached a function passed in from props needs to be called to append / ++ 'BN' in the positionSettings? will cause rerenders but I don't think it'll be the end of the world? seems like this is a lot of work to determine this just to have to do it over again
+                
+                if (!rowIndex) {
+                    // rowIndex isn't set - this player is a bench player
+                    // checking to see if bench positions have been allocated
+                    // grid rows yet / if there are any bench rows left
+                    if (copyPositionIndexes['BN'].length === 0) {
+                        // adding a grid row to the BN position - will cause rerender
+                        let copyPositionSettings = {...props.positionSettings}
+                        copyPositionSettings['BN']++;
+                        props.setPositionSettings(copyPositionSettings);
+                    }
+
+                    rowIndex = copyPositionIndexes['BN'].pop();
+                }
+
+                rosterBoard.push(
+                    <DraftTickerPlayer
+                        key={player.pick}
+                        position={player.Pos}
+                        name={player.Name}
+                        team={player['Tm/Bye']}
+                        gridColumn={team.pick + 1}
+                        gridRow={rowIndex + 1}
+                    />
+                );
+
             }
         }
 
