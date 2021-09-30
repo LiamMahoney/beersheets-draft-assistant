@@ -60,7 +60,7 @@ export function parsePositionSettings (filename) {
     let positions = {};
 
     for (let i in positionMap) {
-        positions[positionMap[i]] = filenameArr[i];
+        positions[positionMap[i]] = parseInt(filenameArr[i]);
     }
 
     console.log('positions', positions);
