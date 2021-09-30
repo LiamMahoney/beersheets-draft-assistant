@@ -63,7 +63,8 @@ export function parsePositionSettings (filename) {
         positions[positionMap[i]] = parseInt(filenameArr[i]);
     }
 
-    console.log('positions', positions);
+    positions['BN'] = 0;
+
     return positions;
 }
 
@@ -72,6 +73,5 @@ export function parsePositionSettings (filename) {
  * @returns {int} number of teams in the league
  */
 export function parseNumTeams (filename) {
-    console.log('numTeams', filename.split(',')[0]);
     return filename.split(',')[0];
 }
