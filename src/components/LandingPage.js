@@ -9,6 +9,7 @@ import {
   } from '@chakra-ui/react';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import UploadButton from './UploadButton';
+import {ReactComponent as BeerIcon} from './beerIcon.svg'
 
 const LandingPage = (props) => {
 
@@ -20,6 +21,9 @@ const LandingPage = (props) => {
             height="100vh"
             width="100vw"
         >  
+            <BeerIcon 
+                height="125px"
+            />
             <Heading 
                 size="2xl"
                 margin={10}
@@ -47,7 +51,7 @@ const LandingPage = (props) => {
                     </ListItem>
                     <ListItem>
                         <Text>
-                            Submit picks as they happen in your draft to the draft assistant
+                            Enter picks as they happen in your draft
                         </Text>
                     </ListItem>
                 </OrderedList>
