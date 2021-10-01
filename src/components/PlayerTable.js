@@ -9,7 +9,7 @@ import {
 import TableFilters from './TableFilters';
 import ReactVirtualTable from './ReactVirtualTable';
 
-const PlayerTable = ({ players, selectPlayer }) => {
+const PlayerTable = ({ players, selectPlayer, draftBoardExpanded }) => {
     const [nameFilter, setNameFilter] = useState('');
     const [teamFilter, setTeamFilter] = useState('');
     const [positionFilter, setPositionFilter] = useState('');
@@ -61,7 +61,7 @@ const PlayerTable = ({ players, selectPlayer }) => {
     }
 
     return (
-        <GridItem colSpan={7} rowSpan={10} >
+        <GridItem colSpan={ draftBoardExpanded ? 1 : 14 } rowSpan={10} overflow="auto" >
             <Flex width="100%" height="100%" flexDir="column" borderRight="1px" borderColor="inherit">
                 <TableFilters
                     handleNameChange={handleNameChangeDebounced}

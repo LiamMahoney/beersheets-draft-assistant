@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Tabs,
     TabList,
@@ -6,14 +6,21 @@ import {
     TabPanels,
     TabPanel,
     GridItem,
+    Flex,
+    IconButton
 } from '@chakra-ui/react';
+import {
+    ChevronLeftIcon,
+    ChevronRightIcon
+} from '@chakra-ui/icons';
 import DraftBoardGrid from './DraftBoardGrid';
 import DraftBoardRosters from './DraftBoardRosters';
 
 const DraftBoard = (props) => {
+
     return (
         <GridItem 
-            colSpan={5} 
+            colSpan={props.draftBoardExpanded ? 23 : 10} 
             rowSpan={10}
         >
             <Tabs
@@ -21,16 +28,30 @@ const DraftBoard = (props) => {
                 display="flex"
                 flexDirection="column"
             >
-                <TabList
-                    justifyContent="space-evenly"
+                <Flex
+                    borderBottom="2px solid"
+                    borderColor="inherit"
                 >
-                    <Tab _focus="unset">
-                        Rosters
-                    </Tab>
-                    <Tab _focus="unset">
-                        Draft Board
-                    </Tab>
-                </TabList>
+                    <IconButton 
+                        icon={ props.draftBoardExpanded ? <ChevronRightIcon /> : <ChevronLeftIcon /> } 
+                        variant="ghost" 
+                        _focus="unset" 
+                        _hover="unset"
+                        onClick={ () => props.setDraftBoardExpanded(!props.draftBoardExpanded) }
+                    />
+                    <TabList
+                        justifyContent="space-evenly"
+                        flexGrow={1}
+                        borderBottom="unset"
+                    >
+                        <Tab _focus="unset">
+                            Rosters
+                        </Tab>
+                        <Tab _focus="unset">
+                            Draft Board
+                        </Tab>
+                    </TabList>
+                </Flex>
                 <TabPanels
                     flexGrow={1}
                     overflow="scroll"

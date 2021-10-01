@@ -11,6 +11,7 @@ const DraftAssistant = (props) => {
     const [availablePlayers, setAvailablePlayers] = useState(props.playerData);
     const [round, setRound] = useState(1);
     const [pick, setPick] = useState(1);
+    const [draftBoardExpanded, setDraftBoardExpanded] = useState(false);
 
     const selectPlayer = (player) => {
         setAvailablePlayers(availablePlayers.filter(p => !(p.Name === player.Name && p.Average === player.Average)));
@@ -47,7 +48,7 @@ const DraftAssistant = (props) => {
             h="100vh"
             w="100vw"
             templateRows="repeat(12, 1fr)"
-            templateColumns="repeat(12, 1fr)"
+            templateColumns="repeat(24, 1fr)"
         >
             <TopSection 
                 draftedPlayers={draftedPlayers}
@@ -58,6 +59,7 @@ const DraftAssistant = (props) => {
             <PlayerTable
                 players={availablePlayers}
                 selectPlayer={selectPlayer}
+                draftBoardExpanded={draftBoardExpanded}
             />
             <DraftBoard
                 numberOfTeams={props.draftData.length}
@@ -66,6 +68,8 @@ const DraftAssistant = (props) => {
                 handleTeamNameChange={props.handleTeamNameChange}
                 positionSettings={props.positionSettings}
                 setPositionSettings={props.setPositionSettings}
+                draftBoardExpanded={draftBoardExpanded}
+                setDraftBoardExpanded={setDraftBoardExpanded}
             />
         </Grid>
     );
