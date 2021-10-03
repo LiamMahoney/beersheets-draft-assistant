@@ -1,9 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
     Grid,
     Flex,
     Text,
-    Box,
     useColorModeValue
 } from '@chakra-ui/react';
 import TeamList from './TeamList';
