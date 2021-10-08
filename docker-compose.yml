@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  beersheets:
+    build: .
+    container_name: beersheets
+
+    networks:
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.beersheets.tls=true
+      - traefik.http.routers.beersheets.tls.certresolver=lets-encrypt
+      - traefik.http.routers.beersheets.rule=Host(`beersheets.liammahoney.io`)
+
+networks:
+  web:
+    external: true

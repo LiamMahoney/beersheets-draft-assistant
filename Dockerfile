@@ -1,14 +1,23 @@
-FROM node:latest
+FROM node:current-alpine AS builder
 
-WORKDIR /user/src/app
+WORKDIR /app
 
 COPY package.json ./
 COPY package-lock.json ./
 
 RUN npm install --silent
-RUN npm install -g serve
 
 COPY . ./
+
+RUN npm run build
+
+FROM node:current-alpine
+
+WORKDIR /usr/share/app
+
+COPY --from=builder /app/build ./build
+
+RUN npm install -g serve
 
 EXPOSE 5000
 
