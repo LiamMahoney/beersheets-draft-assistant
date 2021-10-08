@@ -36,11 +36,6 @@ const LandingPage = (props) => {
                 <OrderedList marginTop={5}>
                     <ListItem>
                         <Text>
-                            Fill out the number of teams in the draft and select the pick you have
-                        </Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>
                             Visit <Link href="https://footballabsurdity.com/beersheet-request-form/" isExternal>the beersheets request form</Link> and fill out the prompts with information about your league
                         </Text>
                     </ListItem>
