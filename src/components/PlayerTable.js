@@ -15,14 +15,22 @@ const PlayerTable = ({ players, selectPlayer, draftBoardExpanded }) => {
     const [positionFilter, setPositionFilter] = useState('');
     const [currPlayers, setCurrPlayers] = useState(players);
 
-    const positions = [...new Set(players.map(p => p.Pos))].sort();
-    const teams = players.reduce((positions, player) => {
-        // filtering out empty teams - appear as '/' in the csv - was also
-        // getting undefined from somewhere that this also filters out
-        if (player['Tm/Bye'] && player['Tm/Bye'] !== '/' && positions.indexOf(player['Tm/Bye']) === -1) {
-            positions.push(player['Tm/Bye']);
+    const positions = players.reduce((positions, player) => {
+        // filtering out empty positions - not sure where this was coming
+        // from but an empty option was appearing
+        if (player.Pos && positions.indexOf(player.Pos) === -1) {
+            positions.push(player.Pos);
         }
         return positions;
+    }, []).sort();
+    
+    const teams = players.reduce((teams, player) => {
+        // filtering out empty teams - appear as '/' in the csv - was also
+        // getting undefined from somewhere that this also filters out
+        if (player['Tm/Bye'] && player['Tm/Bye'] !== '/' && teams.indexOf(player['Tm/Bye']) === -1) {
+            teams.push(player['Tm/Bye']);
+        }
+        return teams;
     }, []).sort();
 
     useEffect(() => {
