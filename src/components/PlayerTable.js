@@ -15,9 +15,23 @@ const PlayerTable = ({ players, selectPlayer, draftBoardExpanded }) => {
     const [positionFilter, setPositionFilter] = useState('');
     const [currPlayers, setCurrPlayers] = useState(players);
 
-    //TODO: need to remove blank options from both of these - use reduce instead of map
-    const positions = [...new Set(players.map(p => p.Pos))].sort();
-    const teams = [...new Set(players.map(p => p['Tm/Bye']))].sort();
+    const positions = players.reduce((positions, player) => {
+        // filtering out empty positions - not sure where this was coming
+        // from but an empty option was appearing
+        if (player.Pos && positions.indexOf(player.Pos) === -1) {
+            positions.push(player.Pos);
+        }
+        return positions;
+    }, []).sort();
+    
+    const teams = players.reduce((teams, player) => {
+        // filtering out empty teams - appear as '/' in the csv - was also
+        // getting undefined from somewhere that this also filters out
+        if (player['Tm/Bye'] && player['Tm/Bye'] !== '/' && teams.indexOf(player['Tm/Bye']) === -1) {
+            teams.push(player['Tm/Bye']);
+        }
+        return teams;
+    }, []).sort();
 
     useEffect(() => {
         let tempPlayers = players;
