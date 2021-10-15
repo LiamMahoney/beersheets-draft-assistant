@@ -11,6 +11,7 @@ const TopSection = (props) => {
                 <TickerPickInfo 
                     pick={props.pick}
                     round={props.round}
+                    handleUndoPick={props.handleUndoPick}
                 />
                 <DraftedPlayerTicker
                     draftedPlayers={props.draftedPlayers}

@@ -1,18 +1,38 @@
 import React from 'react';
-import { Flex, Box, Text } from '@chakra-ui/react';
+import { Flex, Text, IconButton, useColorModeValue, Tooltip} from '@chakra-ui/react';
+import { RepeatClockIcon } from '@chakra-ui/icons';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 
-const TickerPickInfo = ({ round, pick }) => {
+const TickerPickInfo = ({ round, pick, handleUndoPick }) => {
+    const iconColor = useColorModeValue('gray.600', 'gray.300');
 
     return (
         <Flex
             flexDir="column"
         >
-            <Box>
-                <ColorModeSwitcher
-
-                />
-            </Box>
+            <Flex
+                justifyContent="space-between"
+            >
+                <ColorModeSwitcher/>
+                <Tooltip
+                    label="undo pick"
+                    aria-label="undo pick tooltip"
+                >
+                    <IconButton
+                        size="sm"
+                        fontSize="sm"
+                        aria-label="Undo last pick"
+                        variant="ghost"
+                        color="current"
+                        _focus="unset"
+                        _hover={{color: iconColor}}
+                        _active="unset"
+                        padding={2}
+                        onClick={handleUndoPick}
+                        icon={ <RepeatClockIcon /> }
+                    />
+                </Tooltip>
+            </Flex>
             <Flex 
                 flexDir="column"
                 justifyContent="center"
