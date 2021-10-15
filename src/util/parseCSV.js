@@ -7,8 +7,9 @@
  */
 export function parseCSV (data) {
     // Split data into lines and separate headers from actual data
-    // using Array spread operator
-    const [headerLine, ...lines] = data.split('\n');
+    // using Array spread operator - trim is needed to remove a trailing
+    // new line from getting parsed into an object
+    const [headerLine, ...lines] = data.trim().split('\n');
 
     // Split headers line into an array
     // `valueSeparator` may come from some kind of argument
