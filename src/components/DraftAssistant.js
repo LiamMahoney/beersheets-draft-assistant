@@ -43,6 +43,45 @@ const DraftAssistant = (props) => {
         );
     }
 
+    const undoPick = () => {
+        // if pick === 1 then there aren't any picks to undo
+        if (pick > 1) {
+            let copyDraftData = [...props.draftData]
+            
+            // need these variables to find the last player taken in draftData
+            const lastPick = pick - 1
+            const lastRound = lastPick % props.draftData.length === 0 ?
+                                round - 1 :
+                                Math.floor(lastPick/props.draftData.length) + 1;
+            const lastPickRoundPick = lastPick % props.draftData.length === 0 ? 
+                                        props.draftData.length : 
+                                        lastPick % props.draftData.length;
+            const lastPickTeamPick = lastRound % 2 === 0 ?
+                                        props.draftData.length - (lastPickRoundPick - 1) :
+                                        lastPickRoundPick;
+
+            let removedPlayer = copyDraftData[lastPickTeamPick - 1].players.pop();
+            
+            // unsetting values that get set when the player is picked
+            removedPlayer.pick = undefined;
+            removedPlayer.round = undefined;
+            removedPlayer.roundPick = undefined;
+
+            // updating state to undo the pick
+            const newAvailablePlayers = availablePlayers.concat([removedPlayer]);
+
+            const sortedNewAvailablePlayers = newAvailablePlayers.sort((a, b) => {
+                return b.Average - a.Average;
+            });
+
+            setAvailablePlayers(sortedNewAvailablePlayers);
+            props.setDraftData(copyDraftData);
+            setRound(lastRound);
+            setPick(lastPick);
+            setDraftedPlayers(draftedPlayers.filter((player) => !(player.Name === removedPlayer.Name && player.Average === removedPlayer.Average)));
+        }
+    }
+
     return (
         <Grid
             h="100vh"
@@ -54,7 +93,8 @@ const DraftAssistant = (props) => {
                 draftedPlayers={draftedPlayers}
                 numberOfTeams={props.draftData.length}
                 round={round} 
-                pick={pick}    
+                pick={pick} 
+                handleUndoPick={undoPick}   
             />
             <PlayerTable
                 players={availablePlayers}
