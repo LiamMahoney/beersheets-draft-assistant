@@ -50,10 +50,10 @@ const DraftAssistant = (props) => {
             
             // need these variables to find the last player taken in draftData
             const lastPick = pick - 1
-            const lastRound = lastPick & props.draftData.length === 0 ?
-                                round + 1 :
+            const lastRound = lastPick % props.draftData.length === 0 ?
+                                round - 1 :
                                 Math.floor(lastPick/props.draftData.length) + 1;
-            const lastPickRoundPick = lastPick & props.draftData.length === 0 ? 
+            const lastPickRoundPick = lastPick % props.draftData.length === 0 ? 
                                         props.draftData.length : 
                                         lastPick % props.draftData.length;
             const lastPickTeamPick = lastRound % 2 === 0 ?
@@ -70,11 +70,11 @@ const DraftAssistant = (props) => {
             // updating state to undo the pick
             const newAvailablePlayers = availablePlayers.concat([removedPlayer]);
 
-            newAvailablePlayers.sort((a, b) => {
+            const sortedNewAvailablePlayers = newAvailablePlayers.sort((a, b) => {
                 return b.Average - a.Average;
             });
 
-            setAvailablePlayers(newAvailablePlayers);
+            setAvailablePlayers(sortedNewAvailablePlayers);
             props.setDraftData(copyDraftData);
             setRound(lastRound);
             setPick(lastPick);
