@@ -20,6 +20,7 @@ const DraftBoardTeam = ({ team, editing, handleTeamNameChange }) => {
     return (
         <Flex
             justifyContent="space-around"
+            alignItems="center"
             gridColumn={team.pick + 1}
             paddingTop={2}
             position="sticky"
@@ -30,7 +31,17 @@ const DraftBoardTeam = ({ team, editing, handleTeamNameChange }) => {
             {
                 editing
                 ? <Input value={teamName} size="xs" margin={1} onChange={(e) => handleInputChange(e)} />
-                : <Text>{team.name}</Text>
+                : (
+                    <Text
+                        fontFamily="heading"
+                        fontWeight="bold"
+                        lineHeight="4"
+                        fontSize="xs"
+                        textTransform="uppercase"
+                    >
+                        {team.name}
+                    </Text>
+                )
             }
         </Flex>
     );

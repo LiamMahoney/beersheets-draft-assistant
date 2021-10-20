@@ -41,10 +41,22 @@ const TickerPickInfo = ({ round, pick, handleUndoPick }) => {
                 paddingLeft={4}
                 paddingRight={4}
             >
-                <Text>
+                <Text
+                    fontFamily="heading"
+                    fontWeight="bold"
+                    lineHeight="4"
+                    fontSize="xs"
+                    textTransform="uppercase"
+                >
                     Round: {round}
                 </Text>
-                <Text>
+                <Text
+                    fontFamily="heading"
+                    fontWeight="bold"
+                    lineHeight="4"
+                    fontSize="xs"
+                    textTransform="uppercase"
+                >
                     Pick: {pick}
                 </Text>
             </Flex>

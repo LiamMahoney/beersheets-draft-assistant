@@ -5,6 +5,7 @@ import {
     Flex,
     Box,
     Button,
+    Text,
     useColorModeValue
 } from '@chakra-ui/react';
 
@@ -29,18 +30,19 @@ const HeaderCell = (props) => {
             justifyContent="flex-start"
             alignItems="center"
             flexGrow={1}
-            borderBottom="1px"
+            borderBottom="2px"
             borderColor="inherit"
-            fontFamily="heading"
-            fontWeight="bold"
-            letterSpacing="wider"
-            lineHeight="4"
-            color={useColorModeValue("gray.600","gray.400")}
             backgroundColor={useColorModeValue("white", "gray.800")}
-            fontSize="xs"
-            textTransform="uppercase"
         >
-            {props.children}
+            <Text
+                fontFamily="heading"
+                fontWeight="bold"
+                lineHeight="4"
+                fontSize="xs"
+                textTransform="uppercase"
+            >
+                {props.children}
+            </Text>
         </Flex>
     )
 }

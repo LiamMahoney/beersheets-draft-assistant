@@ -13,13 +13,14 @@ const DraftBoardRosters = (props) => {
 
     /**
      * Creates a label for each position. This label will be used as a table
-     * row header.
+     * row header. Splits positions that have a '/' character in them, for
+     * example the posiiton 'RB/WR/TE'.
      * 
      * @returns {array} JSX objects to be rendered
      */
     const getPositionLabels = () => {
         let labels = [];
-
+        
         for (let position in props.positionSettings) {
             for (let i = 0; i < props.positionSettings[position]; i++) {
                 labels.push(
@@ -33,10 +34,21 @@ const DraftBoardRosters = (props) => {
                         padding={1}
                         alignItems="center"
                         justifyContent="center"
+                        flexDirection="column"
                     >
-                        <Text>
-                            {position}
-                        </Text>
+                        {position.split('/').map((pChunk) => {
+                            return (
+                                <Text
+                                    fontFamily="heading"
+                                    fontWeight="bold"
+                                    lineHeight="4"
+                                    fontSize="xs"
+                                    textTransform="uppercase"
+                                >
+                                    {pChunk}
+                                </Text>
+                            )
+                        })}
                     </Flex>
                 );
             }

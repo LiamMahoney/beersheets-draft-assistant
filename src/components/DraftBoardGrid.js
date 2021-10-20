@@ -49,6 +49,11 @@ const DraftBoardGrid = (props) => {
                                 left={0}
                                 backgroundColor={roundLabelBackgroundColor}
                                 padding={1}
+                                fontFamily="heading"
+                                fontWeight="bold"
+                                lineHeight="4"
+                                fontSize="xs"
+                                textTransform="uppercase"
                             >
                                 Round {round}
                             </Text>

@@ -28,6 +28,11 @@ const DraftedPlayerTicker = ({ draftedPlayers, numberOfTeams }) => {
             objects.push(
                 <Text
                     style={{'writing-mode': 'vertical-rl'}}
+                    fontFamily="heading"
+                    fontWeight="bold"
+                    lineHeight="4"
+                    fontSize="xs"
+                    textTransform="uppercase"
                 >
                     Round {p.round}
                 </Text>
