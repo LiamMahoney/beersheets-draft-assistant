@@ -25,7 +25,8 @@ const DraftBoardRosters = (props) => {
             for (let i = 0; i < props.positionSettings[position]; i++) {
                 labels.push(
                     <Flex
-                        height="80px"
+                        minHeight="80px"
+                        height="100%"
                         gridRow={labels.length + 2}
                         gridColumn={1}
                         position="sticky"
@@ -136,6 +137,9 @@ const DraftBoardRosters = (props) => {
                         team={player['Tm/Bye']}
                         gridColumn={team.pick + 1}
                         gridRow={rowIndex + 1}
+                        pick={player.pick}
+                        roundPick={player.roundPick}
+                        round={player.round}
                     />
                 );
 
