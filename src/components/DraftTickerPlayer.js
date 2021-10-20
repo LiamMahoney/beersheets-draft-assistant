@@ -17,22 +17,38 @@ const DraftTickerPlayer = (props) => {
             backgroundColor={positionColorMap[props.position.toLowerCase()]}
             width="110px"
             margin={1.5}
-            minHeight="80%"
-            maxHeight="110px"
+            // minHeight="80%"
+            height="82px"
             flexDirection="column"
             padding={2}
             borderRadius={5}
             gridColumn={props.gridColumn}
             gridRow={props.gridRow}
         >
-            <Text fontSize="xs">{props.position} - {props.team}</Text>
-            <Flex flexGrow="1" flexDirection="column" justifyContent="flex-start">
-                <Text fontSize="xs" >{props.name}</Text>
+            <Text 
+                fontSize="xs"
+                lineHeight="4"
+                textTransform="uppercase"
+            >
+                {props.position} - {props.team}
+            </Text>
+            <Flex flexGrow="1" flexDirection="column" justifyContent="center">
+                <Text 
+                    fontSize="xs" 
+                    lineHeight={4}
+                >
+                    {props.name}
+                </Text>
             </Flex>
             {
                 props.round
-                    ? <Text fontSize="xs">{props.round}.{props.roundPick} - {props.pick}
-                    </Text>
+                    ? (
+                        <Text 
+                            fontSize="xs"
+                        >
+                            {props.round}.{props.roundPick} - {props.pick}
+                        </Text>
+                    )
                     : ''
 
             }
