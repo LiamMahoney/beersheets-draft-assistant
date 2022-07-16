@@ -1,10 +1,15 @@
 import React from 'react';
 import { Flex, Text, IconButton, useColorModeValue, Tooltip} from '@chakra-ui/react';
-import { RepeatClockIcon } from '@chakra-ui/icons';
+import { RepeatClockIcon, DeleteIcon } from '@chakra-ui/icons';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 
 const TickerPickInfo = ({ round, pick, handleUndoPick }) => {
     const iconColor = useColorModeValue('gray.600', 'gray.300');
+
+    const handleDeleteDraft = () => {
+        window.localStorage.clear();
+        window.location.reload();
+    }
 
     return (
         <Flex
@@ -14,6 +19,25 @@ const TickerPickInfo = ({ round, pick, handleUndoPick }) => {
                 justifyContent="space-between"
             >
                 <ColorModeSwitcher/>
+
+                <Tooltip
+                    label="delete draft"
+                    aria-label="delete draft progress"
+                >
+                    <IconButton
+                        size="sm"
+                        fontSize="sm"
+                        aria-label="Undo last pick"
+                        variant="ghost"
+                        color="current"
+                        _focus="unset"
+                        _hover={{color: iconColor}}
+                        _active="unset"
+                        padding={2}
+                        onClick={handleDeleteDraft}
+                        icon={ <DeleteIcon /> }
+                    />
+                </Tooltip>
                 <Tooltip
                     label="undo pick"
                     aria-label="undo pick tooltip"
