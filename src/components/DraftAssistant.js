@@ -5,12 +5,13 @@ import {
 import PlayerTable from './PlayerTable.js';
 import TopSection from './TopSection';
 import DraftBoard from './DraftBoard.js';
+import useStickyState from '../util/useStickyState';
 
 const DraftAssistant = (props) => {
-    const [draftedPlayers, setDraftedPlayers] = useState([]);
-    const [availablePlayers, setAvailablePlayers] = useState(props.playerData);
-    const [round, setRound] = useState(1);
-    const [pick, setPick] = useState(1);
+    const [draftedPlayers, setDraftedPlayers] = useStickyState([], "draftedPlayers");
+    const [availablePlayers, setAvailablePlayers] = useStickyState(props.playerData, "availablePlayers");
+    const [round, setRound] = useStickyState(1, "round");
+    const [pick, setPick] = useStickyState(1, "pick");
     const [draftBoardExpanded, setDraftBoardExpanded] = useState(false);
 
     const selectPlayer = (player) => {

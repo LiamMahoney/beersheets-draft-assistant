@@ -1,4 +1,4 @@
-import { useState, React } from 'react';
+import { React } from 'react';
 import {
   ChakraProvider,
   theme,
@@ -6,12 +6,13 @@ import {
 import LandingPage from './components/LandingPage';
 import DraftAssistant from './components/DraftAssistant';
 import { parseCSV, parsePositionSettings, parseNumTeams } from './util/parseCSV';
+import useStickyState from './util/useStickyState';
 
 function App() {
-  const [playerData, setPlayerData] = useState(undefined);
-  const [numTeams, setNumTeams] = useState(undefined);
-  const [positionSettings, setPositionSettings] = useState(undefined);
-  const [draftData, setDraftData] = useState(undefined);
+  const [playerData, setPlayerData] = useStickyState(undefined, "playerData");
+  const [numTeams, setNumTeams] = useStickyState(undefined, "numTeams");
+  const [positionSettings, setPositionSettings] = useStickyState(undefined, "positionSettings");
+  const [draftData, setDraftData] = useStickyState(undefined, "draftData");
 
   const loadFile = (e) => {
     e.preventDefault();
