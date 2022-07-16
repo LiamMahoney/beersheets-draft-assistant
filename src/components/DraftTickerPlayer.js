@@ -5,7 +5,7 @@ const DraftTickerPlayer = (props) => {
 
     const positionColorMap = {
         qb: useColorModeValue('red.200', 'red.600'),
-        rb: useColorModeValue('blue.200', 'blue.600'),
+        rb: useColorModeValue('purple.200', 'purple.600'),
         wr: useColorModeValue('green.200', 'green.600'),
         te: useColorModeValue('orange.200', 'orange.600'),
         def: useColorModeValue('yellow.200', 'yellow.600'),
