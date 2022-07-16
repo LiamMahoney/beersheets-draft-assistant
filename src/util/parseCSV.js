@@ -46,14 +46,14 @@ export function parseCSV (data) {
 export function parsePositionSettings (filename) {
     // position stored at each index
     const positionMap = {
-        2: 'QB',
-        3: 'RB',
-        4: 'WR',
-        5: 'TE',
-        6: 'RB/WR/TE',
-        7: 'RB/WR',
-        8: 'WR/TE',
-        9: 'QB/RB/WR/TE'
+        1: 'QB',
+        2: 'RB',
+        3: 'WR',
+        4: 'TE',
+        5: 'RB/WR/TE',
+        6: 'RB/WR',
+        7: 'WR/TE',
+        8: 'QB/RB/WR/TE'
     }
 
     const filenameArr = filename.split(',');
